@@ -8,6 +8,7 @@ import { ResponseMessages } from 'src/_common/enums/ResponseMessages.enum';
 import { Product } from '@prisma/client';
 import { Availibility } from 'src/_common/enums/Availibility.enum';
 import { UpdateProductRequestDto } from './dto/Request/UpdateProduct.request.dto';
+import { ProductBaseReponse } from 'src/_common/response/Product.response';
 
 @Controller('products')
 export class ProductsController {
@@ -15,7 +16,7 @@ export class ProductsController {
 
   @Post()
   async create(@Body() createProductDto: CreateProductRequestDto, @Res() res: Response<ProductResponseDto>): Promise<void> {
-    const data: Product = await this.productsService.create(createProductDto);
+    const data: any = await this.productsService.create(createProductDto);
     res.json(
       new BaseResponse(
         {
@@ -24,7 +25,10 @@ export class ProductsController {
             name: data.name,
             price: data.price,
             sale: data.sale,
-            availibility: data.availibility as Availibility
+            availibility: data.availibility as Availibility,
+            description: data.description || null,
+            tags: data.tags || [],
+            reviews: data.reviews || []
           }
         },
         ResponseMessages.SUCCESS,
@@ -35,7 +39,7 @@ export class ProductsController {
 
   @Get()
   async findAll(@Res() res: Response<ProductResponseDto>): Promise<void> {
-    const data: Product[] = await this.productsService.findAll();
+    const data: any[] = await this.productsService.findAll();
     res.json(
       new BaseResponse(
         {
@@ -44,7 +48,10 @@ export class ProductsController {
             name: prd.name,
             price: prd.price,
             sale: prd.sale,
-            availibility: prd.availibility as Availibility
+            availibility: prd.availibility as Availibility,
+            description: prd.description || null,
+            tags: prd.tags || [],
+            reviews: prd.reviews || []
           }))
         },
         ResponseMessages.SUCCESS,
@@ -54,7 +61,8 @@ export class ProductsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response<ProductResponseDto>): Promise<void> {
-    const data: Product | null = await this.productsService.findOne(Number(id));
+    const data: any = await this.productsService.findOne(Number(id));
+    console.log(data);
     res.json(
       new BaseResponse(
         {
@@ -63,7 +71,10 @@ export class ProductsController {
             name: data.name,
             price: data.price,
             sale: data.sale,
-            availibility: data.availibility as Availibility
+            availibility: data.availibility as Availibility,
+            description: data.description || null,
+            tags: data.tags || [],
+            reviews: data.reviews || []
           }
         },
         ResponseMessages.SUCCESS,
@@ -74,7 +85,7 @@ export class ProductsController {
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductRequestDto, @Res() res: Response<ProductResponseDto>): Promise<void> {
-    const updatedProduct: Product = await this.productsService.update(Number(id), updateProductDto);
+    const updatedProduct: any = await this.productsService.update(Number(id), updateProductDto);
     res.json(
       new BaseResponse(
         {
@@ -83,7 +94,10 @@ export class ProductsController {
             name: updatedProduct.name,
             price: updatedProduct.price,
             sale: updatedProduct.sale,
-            availibility: updatedProduct.availibility as Availibility
+            availibility: updatedProduct.availibility as Availibility,
+            description: updatedProduct.description || null,
+            tags: updatedProduct.tags || [],
+            reviews: updatedProduct.reviews || []
           }
         },
         ResponseMessages.SUCCESS,
@@ -94,7 +108,7 @@ export class ProductsController {
 
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: Response<ProductResponseDto>): Promise<void> {
-    const deletedProduct: Product = await this.productsService.remove(Number(id));
+    const deletedProduct: any = await this.productsService.remove(Number(id));
     res.json(
       new BaseResponse(
         {
@@ -103,7 +117,10 @@ export class ProductsController {
             name: deletedProduct.name,
             price: deletedProduct.price,
             sale: deletedProduct.sale,
-            availibility: deletedProduct.availibility as Availibility
+            availibility: deletedProduct.availibility as Availibility,
+            description: deletedProduct.description || null,
+            tags: deletedProduct.tags || [],
+            reviews: deletedProduct.reviews || []
           }
         },
         ResponseMessages.SUCCESS,
