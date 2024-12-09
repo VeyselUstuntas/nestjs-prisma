@@ -1,31 +1,39 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductRequestDto } from './dto/Request/CreateProduct.request.dto';
 import { DatabaseService } from 'src/database/database.service';
+import { ProductResponse } from './dto/Response/Product.response.dto';
+import { ProductBaseReponse } from 'src/_common/response/Product.response';
+import { Availibility } from 'src/_common/enums/Availibility.enum';
+import { Prisma, Product } from '@prisma/client';
+import { UpdateProductRequestDto } from './dto/Request/UpdateProduct.request.dto';
 
 @Injectable()
 export class ProductsService {
 
-  constructor(@Inject() private readonly databaseService : DatabaseService){}
-  
-  async create(createProductDto: CreateProductDto) {
-    const product = this.databaseService.product.create({data:createProductDto});
+  constructor(@Inject() private readonly databaseService: DatabaseService) { }
+
+  async create(createProductDto: CreateProductRequestDto): Promise<Product> {
+    const product: Product | null = await this.databaseService.product.create({ data: createProductDto });
     return product;
   }
 
-  findAll() {
-    return null;
+  async findAll(): Promise<Product[]> {
+    const products: Product[] | null = await this.databaseService.product.findMany();
+    return products;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number): Promise<Product> {
+    const product: Product | null = await this.databaseService.product.findUnique({ where: { id: id } });
+    return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, data: UpdateProductRequestDto): Promise<Product> {
+    const updatedProduct: Product = await this.databaseService.product.update({ where: { id: id }, data: data });
+    return updatedProduct;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number): Promise<Product> {
+    const deletedProduct = await this.databaseService.product.delete({ where: { id: id } });
+    return deletedProduct;
   }
 }
