@@ -1,5 +1,5 @@
 import { BaseResponse } from "src/_base/response/Base.response";
-import { ProductBaseReponse } from "src/_common/response/Product.response";
+import { ProductBaseReponse } from "src/_common/response/product/ProductBase.response";
 
 export class ProductResponse {
     product: ProductBaseReponse | ProductBaseReponse[];

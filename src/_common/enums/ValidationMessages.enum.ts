@@ -3,6 +3,12 @@ export enum DtoPrefix {
     PRICE = 'PRICE',
     AVAILIBILITY = 'AVAILIBILITY',
     SALE = 'SALE',
+    TITLE = 'TITLE',
+    RATING = 'RATING',
+    CONTENT = 'CONTENT',
+    CREATE = 'CREATE',
+    DESCRIPTION = 'DESCRIPTION',
+    PRODUCT_ID = 'PRODUCT_ID',
 }
 
 export enum ValidationType {
@@ -14,7 +20,7 @@ export enum ValidationType {
     MIN_LENGTH = 'MIN_LENGTH',
     NOT_STRONG = 'NOT_STRONG',
     NOT_VALID = 'NOT_VALID',
-    MUST_BE_ENUM = "MUST_BE_ENUM"
+    MUST_BE_ENUM = 'MUST_BE_ENUM'
 }
 
 

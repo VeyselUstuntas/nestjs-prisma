@@ -8,7 +8,6 @@ import { ResponseMessages } from 'src/_common/enums/ResponseMessages.enum';
 import { Product } from '@prisma/client';
 import { Availibility } from 'src/_common/enums/Availibility.enum';
 import { UpdateProductRequestDto } from './dto/Request/UpdateProduct.request.dto';
-import { ProductBaseReponse } from 'src/_common/response/Product.response';
 
 @Controller('products')
 export class ProductsController {

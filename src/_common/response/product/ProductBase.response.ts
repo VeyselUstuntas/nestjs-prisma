@@ -1,7 +1,7 @@
 import { Description } from "@prisma/client";
-import { Availibility } from "../enums/Availibility.enum";
-import { Review } from "./Review.response";
-import { Tag } from "./Tag.response";
+import { Availibility } from "../../enums/Availibility.enum";
+import { ReviewBaseResponse } from "../review/ReviewBase.response";
+import { Tag } from "../Tag.response";
 
 export class ProductBaseReponse {
     id: number;
@@ -11,5 +11,5 @@ export class ProductBaseReponse {
     availibility: Availibility;
     description?: Description;
     tags?: Tag[];
-    reviews?: Review[];
+    reviews?: ReviewBaseResponse[];
 }

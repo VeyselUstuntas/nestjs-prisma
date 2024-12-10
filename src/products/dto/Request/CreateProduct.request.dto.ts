@@ -1,6 +1,9 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsString, MaxLength, MinLength } from "class-validator";
+import { Type } from "class-transformer";
+import { IsEnum, IsNotEmpty, IsNotEmptyObject, IsNumber, IsString, MaxLength, MinLength, ValidateNested } from "class-validator";
 import { Availibility } from "src/_common/enums/Availibility.enum";
 import { DtoPrefix, getValidationMessage, ValidationType } from "src/_common/enums/ValidationMessages.enum";
+import { Description } from "src/_common/response/Description.response";
+import { CreateDescriptionRequestDto } from "src/descriptions/dto/request/CreateDescription.request.dto";
 
 export class CreateProductRequestDto {
 
@@ -18,5 +21,12 @@ export class CreateProductRequestDto {
     @IsEnum(Availibility, { message: getValidationMessage(DtoPrefix.AVAILIBILITY, ValidationType.MUST_BE_ENUM) })
     @IsNotEmpty({ message: getValidationMessage(DtoPrefix.AVAILIBILITY, ValidationType.IS_NOT_EMPTY) })
     availibility: Availibility;
+
+
+
+    @IsNotEmptyObject({ }, { message: getValidationMessage(DtoPrefix.DESCRIPTION, ValidationType.IS_NOT_EMPTY) })
+    @Type(() => CreateDescriptionRequestDto)
+    @ValidateNested()
+    description: CreateDescriptionRequestDto;
 
 }

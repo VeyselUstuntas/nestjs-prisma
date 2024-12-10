@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateProductRequestDto } from './dto/Request/CreateProduct.request.dto';
 import { DatabaseService } from 'src/database/database.service';
 import { ProductResponse } from './dto/Response/Product.response.dto';
-import { ProductBaseReponse } from 'src/_common/response/Product.response';
+import { ProductBaseReponse } from 'src/_common/response/product/ProductBase.response';
 import { Availibility } from 'src/_common/enums/Availibility.enum';
 import { Prisma, Product } from '@prisma/client';
 import { UpdateProductRequestDto } from './dto/Request/UpdateProduct.request.dto';
