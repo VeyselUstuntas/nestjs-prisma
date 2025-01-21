@@ -29,4 +29,6 @@ export class CreateProductRequestDto {
     @ValidateNested()
     description: CreateDescriptionRequestDto;
 
+
+
 }

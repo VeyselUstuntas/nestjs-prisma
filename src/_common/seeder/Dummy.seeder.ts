@@ -21,6 +21,11 @@ async function main() {
                     { content: "Atletichs" }
                 ]
             },
+        },
+        include:{
+            description:true,
+            reviews:true,
+            tags:true
         }
     });
 
